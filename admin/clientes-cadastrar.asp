@@ -9,19 +9,19 @@
 
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-                <h5><a class="nav-link text-info mx-3" href="clientes-cadastrar.asp">Cadastrar Clientes <span class="sr-only">(página atual)</span></a></h5>
+                <h5><a class="nav-link text-info mx-3" href="clientes-cadastrar.asp">Cadastrar Participantes<span class="sr-only">(página atual)</span></a></h5>
             </li>
             <li class="nav-item">
-                <h5><a class="nav-link mx-3" href="#">Clientes</a></h5>
+                <h5><a class="nav-link mx-3" href="clientes.asp">Participantes</a></h5>
             </li>
             <li class="nav-item">
-                <h5><a class="nav-link mx-3" href="#">Cadastrar Empresas</a></h5>
+                <h5><a class="nav-link mx-3" href="empresas-cadastrar.asp">Cadastrar Empresas</a></h5>
             </li>
             <li class="nav-item">
-                <h5><a class="nav-link mx-3" href="#">Empresas</a></h5>
+                <h5><a class="nav-link mx-3" href="empresas.asp">Empresas</a></h5>
             </li>
             <li class="nav-item">
-                <h5><a class="nav-link text-danger mx-3" href="#">Sair</a></h5>
+                <h5><a class="nav-link text-danger mx-3" href="functions/logout.asp">Sair</a></h5>
             </li>
         </ul>    
     </div>
@@ -32,10 +32,11 @@
     <h3 class="text-muted text-center mt-4">Carregue o arquivo com a lista de inscritos no evento.</h3>
     
     <div class="container" style="display: flex; justify-content: center;">
-        <form action="" class="mt-5">
+        <form action="functions/cadastrarClientes.asp" enctype="multipart/form-data" method="POST" class="mt-5">
             <div class="form-group">
                 <label id="fileLabel" class="btn btn-info px-5 py-2 fileLabel" for="arqClientes">Procurar</label>
-                <input id="arqClientes" onchange="mudarLabel();" placeholder="Selecione o arquivo" class="form-control" type="file" name="clientes">
+                <input id="arqClientes" onchange="mudarLabel('arqClientes', 'fileLabel');" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" placeholder="Selecione o arquivo" class="form-control display" type="file" name="clientes">
+                <input type="submit" id="enviarArq" class="btn btn-outline-info ml-auto mr-auto" style="display: none;" value="Enviar Arquivo">
             </div>
         </form>
     </div>

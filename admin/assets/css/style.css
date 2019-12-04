@@ -18,7 +18,14 @@
     background-color: #007bff;
     color: #FFF;
 }
-
+.card-counter.info{
+    background-color: #5bc0de;
+    color: #FFF;
+}
+.card-counter.dark{
+    background-color: #292b2c;
+    color: #FFF;
+}
 .card-counter.danger{
     background-color: #ef5350;
     color: #FFF;
@@ -63,11 +70,15 @@
 }
 
 /* Esconde o input */
-input[type='file'] {
+.display {
     display: none
   }
   
 /* Aparência que terá o seletor de arquivo */
 .fileLabel {
     font-size: 1.2em;
+}
+.logoLabel {
+    width: 200px;
+    height: 38px;
 }
