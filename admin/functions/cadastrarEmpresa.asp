@@ -17,7 +17,7 @@
     execQuery(SQL)
     
     upl.Save
-    Set SaFileUp = Nothing 
+    Set upl = Nothing 
 
 
     Response.Redirect("../empresas.asp")

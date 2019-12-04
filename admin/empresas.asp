@@ -51,7 +51,7 @@
                         response.write("")
 
                         response.write("<tr class='text-center'>")
-                            response.write("<td>" & req("logotipo") & "</td>")
+                            response.write("<td><img class='img-logo' src='assets/images/logotipos/" & req("logotipo") & "'></td>")
                             response.write("<td>" & req("nome") & "</td>")
                             response.write("<td>" & req("email") & "</td>")
                             response.write("<td>" & req("razao_social") & "</td>")

@@ -32,7 +32,7 @@
     <h3 class="text-muted text-center mt-4">Carregue o arquivo com a lista de inscritos no evento.</h3>
     
     <div class="container" style="display: flex; justify-content: center;">
-        <form action="functions/cadastrarClientes.asp" enctype="multipart/form-data" method="POST" class="mt-5">
+        <form action="functions/cadastrarClientes.asp" method="POST" class="mt-5" enctype="multipart/form-data">
             <div class="form-group">
                 <label id="fileLabel" class="btn btn-info px-5 py-2 fileLabel" for="arqClientes">Procurar</label>
                 <input id="arqClientes" onchange="mudarLabel('arqClientes', 'fileLabel');" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" placeholder="Selecione o arquivo" class="form-control display" type="file" name="clientes">

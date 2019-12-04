@@ -1,40 +1,45 @@
 <%
-clientes = Request.Form("clientes")
-Dim Conn, RS
-Dim Campos, contador
+    
+    'Response.write(clientes)
 
-'// CONECTAMOS COM O BANCO DE DADOS
-Set Conn = CreateObject("ADODB.Connection")
-With Conn
-.Provider = "Microsoft.Jet.OLEDB.4.0"
+    'ExcelFile = "c:\temp\unlocodes.xlsx"
 
-'// Nesta linha perca que a conexão indica que utilizaremos um arquivo do Excel
-.ConnectionString = "Data Source="& clientes &";Extended Properties=Excel 8.0;"
-.Open
-End With
+    SET upl = Server.CreateObject("SoftArtisans.FileUp") 
+    upl.Path = Server.MapPath("../uploads/")
+    clientes = upl.Form("clientes")
+    upl.Save
 
-'// AO CRIAR O RECORDSET, O SELECT INDICA O NOME DA PLANILHA DO ARQUIVO
-Set RS = Conn.Execute("SELECT * FROM [Plan1$] ")
+    ExcelFile = upl.Path & clientes
+    SQL = "SELECT * FROM [Planilha1$]"
+    
+    Set ExcelConnection = Server.createobject("ADODB.Connection")
+    ExcelConnection.Open "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & ExcelFile & ";Extended Properties=""Excel 12.0 Xml;HDR=YES;IMEX=1"";"
+    
+    SET RS = Server.CreateObject("ADODB.Recordset")
+    RS.Open SQL, ExcelConnection
+    
+    Response.Write "<table border=""1""><thead><tr>"
+    
+    FOR EACH Column IN RS.Fields
+        Response.Write "<th>" & Column.Name & "</th>"
+    NEXT
+    
+    Response.Write "</tr></thead><tbody>"
+    
+    IF NOT RS.EOF THEN
+        WHILE NOT RS.eof
+            Response.Write "<tr>"
+            FOR EACH Field IN RS.Fields
+                Response.Write "<td>" & Field.value & "</td>"
+            NEXT
+            Response.Write "</tr>"
+            RS.movenext
+        WEND
+    END IF
 
-'// CONTAMOS QUANTAS LINHAS EXISTEM NO ARQUIVO
-Campos = RS.Fields.Count
-
-'// INICIAMOS O LOOP
-response.write "<table border=""1"">"
-    Do While RS.EOF = False
-        response.write "<tr>"
-        '// Aqui informamos os nomes das colunas para então lista os resultados
-        response.write "<td><font size=1 face=verdana><b>" & RS("c1") & "</td>"
-        response.write "<td><font size=1 face=verdana><b>" & RS("c2") & "</td>"
-        response.write "<td><font size=1 face=verdana><b>" & RS("c3") & "</td>"
-        response.write "</tr>"
-
-        vc1 = RS("c1")
-        vc2 = RS("c2")
-        vc3 = RS("c3")
-
-        RS.MoveNext
-    Loop
-response.write "</table>"
-
+    Response.Write "</tbody></table>"
+    
+    Set upl = Nothing 
+    RS.close
+    ExcelConnection.Close
 %>

@@ -37,7 +37,9 @@
 
 <div class="container" style="display: flex; justify-content: center; align-items: center; height: 10vh;"></div>
     <h1 class='text-info text-center'>Editar dados da empresa</h1>
-    <form class="mt-5" style="display: flex; justify-content: center; align-items: center; flex-direction: column;" action="functions/editarEmpresa.asp" method="POST">
+    
+    <form class="mt-5" style="display: flex; justify-content: center; align-items: center; flex-direction: column;" action="functions/editarEmpresa.asp" method="POST" enctype="multipart/form-data">
+        <img class='img-logo mb-3' src='assets/images/logotipos/<% =req("logotipo") %>'>
         <input type="hidden" name="id" value='<% =request.querystring("id") %>' id="id">
         <div class="form-row">
             <div class="form-group">
@@ -74,3 +76,4 @@
 </div>
 
 <!--#include file="includes/footer.asp"-->
+<script src="assets/js/mudarLabel.js"></script>
