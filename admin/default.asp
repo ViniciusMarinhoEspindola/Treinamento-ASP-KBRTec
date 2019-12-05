@@ -14,7 +14,7 @@
             </div>
 
             <div class="col-md-3">
-                <a href="#">
+                <a href="participantes.asp">
                     <div class="card-counter dark">
                         <i class="fa fa-users"></i>
                         <span class="count-numbers">Participantes</span>

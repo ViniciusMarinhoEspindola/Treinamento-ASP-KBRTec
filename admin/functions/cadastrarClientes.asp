@@ -1,45 +1,53 @@
+<!--#include file="../../config/conexao.asp"-->
 <%
-    
-    'Response.write(clientes)
-
-    'ExcelFile = "c:\temp\unlocodes.xlsx"
-
     SET upl = Server.CreateObject("SoftArtisans.FileUp") 
     upl.Path = Server.MapPath("../uploads/")
-    clientes = upl.Form("clientes")
+    clientes = upl.userFilename
     upl.Save
 
-    ExcelFile = upl.Path & clientes
-    SQL = "SELECT * FROM [Planilha1$]"
+    ExcelFile = upl.Path & "\" & clientes
+    SQL = "SELECT * FROM [Lista de Participantes$]"
     
     Set ExcelConnection = Server.createobject("ADODB.Connection")
     ExcelConnection.Open "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & ExcelFile & ";Extended Properties=""Excel 12.0 Xml;HDR=YES;IMEX=1"";"
-    
+
     SET RS = Server.CreateObject("ADODB.Recordset")
     RS.Open SQL, ExcelConnection
     
-    Response.Write "<table border=""1""><thead><tr>"
-    
-    FOR EACH Column IN RS.Fields
-        Response.Write "<th>" & Column.Name & "</th>"
-    NEXT
-    
-    Response.Write "</tr></thead><tbody>"
-    
     IF NOT RS.EOF THEN
         WHILE NOT RS.eof
-            Response.Write "<tr>"
-            FOR EACH Field IN RS.Fields
-                Response.Write "<td>" & Field.value & "</td>"
+            SQL = "INSERT INTO participantes (id_participante, nome, sobrenome, tipo_de_ingresso, email, telefone, data_evento, fase_planejamento) VALUES ("
+            FOR EACH Column IN RS.Fields
+                If Column.Name = "Informe seu telefone celular: Ex: 13 99999-9999" Then
+                    telefone = RS(Column.Name)
+                Else 
+                    If Column.Name = "Informe seu telefone celular: Ex: 13 99999-99991" Then
+                        telefone = telefone & RS(Column.Name)
+                        SQL = SQL & "'" & telefone & "',"
+                    Else
+                        If IsDate(RS(Column.Name)) Then
+                            SQL = SQL & "STR_TO_DATE('" & RS(Column.Name) & "','%d/%m/%Y'),"
+                        Else
+                            SQL = SQL & "'" & RS(Column.Name) & "',"
+                        End If
+                    End If
+                End If
             NEXT
-            Response.Write "</tr>"
+            telefone = ""
+            
+            SQL = left(SQL,(len(SQL)-1))
+            SQL = SQL & ");"
+            execQuery(SQL)
             RS.movenext
         WEND
     END IF
 
-    Response.Write "</tbody></table>"
-    
-    Set upl = Nothing 
     RS.close
     ExcelConnection.Close
+    
+    upl.Delete
+    
+    Set upl = Nothing 
+
+    'Response.Redirect("../clientes-cadastrar.asp")
 %>

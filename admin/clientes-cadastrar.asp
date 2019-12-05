@@ -12,7 +12,7 @@
                 <h5><a class="nav-link text-info mx-3" href="clientes-cadastrar.asp">Cadastrar Participantes<span class="sr-only">(página atual)</span></a></h5>
             </li>
             <li class="nav-item">
-                <h5><a class="nav-link mx-3" href="clientes.asp">Participantes</a></h5>
+                <h5><a class="nav-link mx-3" href="participantes.asp">Participantes</a></h5>
             </li>
             <li class="nav-item">
                 <h5><a class="nav-link mx-3" href="empresas-cadastrar.asp">Cadastrar Empresas</a></h5>
@@ -44,3 +44,22 @@
 
 <!--#include file="includes/footer.asp"-->
 <script src="assets/js/mudarLabel.js"></script>
+<script>
+    // $("form").submit(function (e) {
+    //     var formData = new FormData($("form")[0]); 
+    //     $.ajax({
+    //         url: "functions/cadastrarClientes.asp",
+    //         method: "POST",
+    //         enctype: 'multipart/form-data',
+    //         data: formData,
+    //         success: function(e) {
+    //             alert("Sucesso");
+    //         },
+    //         error: function(e) {
+    //             alert("Erro");
+    //         }
+    //     });
+    //     console.log(formData)
+    //     e.preventDefault();
+    // });
+</script>

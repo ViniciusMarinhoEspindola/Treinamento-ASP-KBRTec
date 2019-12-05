@@ -14,7 +14,7 @@
                 <h5><a class="nav-link mx-3" href="clientes-cadastrar.asp">Cadastrar Participantes</a></h5>
             </li>
             <li class="nav-item">
-                <h5><a class="nav-link mx-3" href="clientes.asp">Participantes</a></h5>
+                <h5><a class="nav-link mx-3" href="participantes.asp">Participantes</a></h5>
             </li>
             <li class="nav-item">
                 <h5><a class="nav-link mx-3" href="empresas-cadastrar.asp">Cadastrar Empresas</a></h5>
