@@ -44,22 +44,3 @@
 
 <!--#include file="includes/footer.asp"-->
 <script src="assets/js/mudarLabel.js"></script>
-<script>
-    // $("form").submit(function (e) {
-    //     var formData = new FormData($("form")[0]); 
-    //     $.ajax({
-    //         url: "functions/cadastrarClientes.asp",
-    //         method: "POST",
-    //         enctype: 'multipart/form-data',
-    //         data: formData,
-    //         success: function(e) {
-    //             alert("Sucesso");
-    //         },
-    //         error: function(e) {
-    //             alert("Erro");
-    //         }
-    //     });
-    //     console.log(formData)
-    //     e.preventDefault();
-    // });
-</script>

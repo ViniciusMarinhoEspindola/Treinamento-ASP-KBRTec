@@ -1,0 +1,9 @@
+/* Esconde o input */
+.display {
+    display: none
+  }
+  
+/* Aparência que terá o seletor de arquivo */
+.fileLabel {
+    font-size: 1.2em;
+}
