@@ -1,9 +1,8 @@
 <% 
-    If Session("admin") <> true Then
+    If Session("lojistas") <> true Then
         Response.Redirect("../")
     End if
 %>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -20,9 +19,6 @@
     <style>
   
     </style>
-    <title>Admin</title>
+    <title>Lojistas</title>
 </head>
 <body>
-   
-
-        

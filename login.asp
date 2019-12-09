@@ -12,7 +12,7 @@
             Response.Redirect("admin/")
         Else
             Session("lojistas") = true
-            Response.write("Lojista")
+            Response.Redirect("lojistas/")
         End if
     Else
         Session.Abandon

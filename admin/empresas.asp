@@ -1,3 +1,4 @@
+<%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
 <!--#include file="includes/header.asp"-->
 <!--#include file="../config/conexao.asp"-->
 <nav class="navbar navbar-expand-lg navbar-dark py-4 bg-dark">    

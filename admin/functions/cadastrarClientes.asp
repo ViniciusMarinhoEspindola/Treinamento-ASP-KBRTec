@@ -15,31 +15,42 @@
     RS.Open SQL, ExcelConnection
     
     IF NOT RS.EOF THEN
+        Query = "SELECT id_participante FROM participantes;"
+        Set req = getConsulta(Query)
+        
+        SQL = "INSERT INTO participantes (id_participante, nome, sobrenome, tipo_de_ingresso, email, telefone, data_evento, fase_planejamento) VALUES ("
+        
+        Dim campos(8)
+        Dim cont
+        
         WHILE NOT RS.eof
-            SQL = "INSERT INTO participantes (id_participante, nome, sobrenome, tipo_de_ingresso, email, telefone, data_evento, fase_planejamento) VALUES ("
-            FOR EACH Column IN RS.Fields
-                If Column.Name = "Informe seu telefone celular: Ex: 13 99999-9999" Then
-                    telefone = RS(Column.Name)
-                Else 
-                    If Column.Name = "Informe seu telefone celular: Ex: 13 99999-99991" Then
-                        telefone = telefone & RS(Column.Name)
-                        SQL = SQL & "'" & telefone & "',"
-                    Else
-                        If IsDate(RS(Column.Name)) Then
-                            SQL = SQL & "STR_TO_DATE('" & RS(Column.Name) & "','%d/%m/%Y'),"
-                        Else
-                            SQL = SQL & "'" & RS(Column.Name) & "',"
-                        End If
-                    End If
-                End If
-            NEXT
-            telefone = ""
-            
-            SQL = left(SQL,(len(SQL)-1))
-            SQL = SQL & ");"
-            execQuery(SQL)
+            cont = 0
+            for each Field in RS.Fields
+                campos(cont) = Field.value
+                cont = cont + 1
+            Next   
+            If not req.EOF Then
+                do until req.EOF
+                    If campos(0) = req("id_participante") Then
+                        consulta = true
+                    End if
+                    req.movenext
+                loop
+                req.movefirst
+            End if
+            If consulta = false Then
+                telefone = campos(5) & campos(6)                
+                SQL = SQL & "'" & campos(0) & "','" & campos(1) & "','" & campos(2) & "','" & campos(3) & "','" & campos(4) & "','" & telefone & "',STR_TO_DATE('" & campos(7) & "','%d/%m/%Y'), '" & campos(8) & "'"
+            End if
+            consulta = false
+            SQL = SQL & "),("
             RS.movenext
         WEND
+        SQL = left(SQL,(len(SQL)-2)) & ";"
+        SQL = replace(SQL, "(),", "")
+        SQL = replace(SQL, ",()", "")
+
+        execQuery(SQL)
     END IF
 
     RS.close
@@ -49,5 +60,5 @@
     
     Set upl = Nothing 
 
-    'Response.Redirect("../clientes-cadastrar.asp")
+    Response.Redirect("../clientes-cadastrar.asp")
 %>
