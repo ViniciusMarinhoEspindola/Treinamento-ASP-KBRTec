@@ -22,3 +22,18 @@
     <title>Lojistas</title>
 </head>
 <body>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark py-4 bg-info">     
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+        <h1 class=" mr-auto navbar-brand">Página do Lojista</h1>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <h5><a class="nav-link text-light mx-3" href="functions/logout.asp">Sair</a></h5>
+            </li>
+        </ul>
+    </div>
+</nav>

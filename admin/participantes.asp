@@ -1,6 +1,7 @@
 <%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
 <!--#include file="includes/header.asp"-->
 <!--#include file="../config/conexao.asp"-->
+<!--#include file="../functions/functions.asp"-->
 <nav class="navbar navbar-expand-lg navbar-dark py-4 bg-dark">    
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
         <span class="navbar-toggler-icon"></span>
@@ -31,7 +32,9 @@
 
 
 <div class="container mt-5">
-   
+    <%
+        call getMessage()
+    %>
     <div class="table-responsivee">
         <table id="table-participantes" class="table table-hover">
              <caption ><label><input type='checkbox' class="mr-auto" name='selecionar-tudo'> Selecionar tudo</label></caption>

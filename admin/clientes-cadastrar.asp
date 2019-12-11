@@ -1,4 +1,5 @@
 <!--#include file="includes/header.asp"-->
+<!--#include file="../functions/functions.asp"-->
 <nav class="navbar navbar-expand-lg navbar-dark py-4 bg-dark">    
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
         <span class="navbar-toggler-icon"></span>
@@ -28,6 +29,9 @@
 </nav>
 
 <div style="display: flex; justify-content: center; flex-direction: column; height: 70vh;">
+    <%
+        call getMessage()
+    %>
     <h1 class="text-info text-center mt-5">INSTRUÇÕES</h1>
     <h3 class="text-muted text-center mt-4">Carregue o arquivo com a lista de inscritos no evento.</h3>
     

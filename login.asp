@@ -8,10 +8,14 @@
 
     If not req.EOF Then
         If req("permissao") Then
+            Session("dadosUsuario") = Array("","","","")
+            Session("status") = ""
+            Session("message") = ""
             Session("admin") = true
             Response.Redirect("admin/")
         Else
             Session("lojistas") = true
+            Session("emailLojistas") = req("email")
             Response.Redirect("lojistas/")
         End if
     Else

@@ -13,7 +13,6 @@
         req.Open query, Conn, 3
         'Conn.Close
         Set Conn = Nothing
-            
         Set getConsulta = req
     End Function
 

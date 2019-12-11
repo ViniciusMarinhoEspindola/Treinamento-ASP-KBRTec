@@ -16,5 +16,7 @@
     
     Set upl = Nothing 
     
+    Session("status") = "Sucesso"
+    Session("message") = "A empresa foi removida com sucesso."
     Response.Redirect("../empresas.asp")
 %>

@@ -1,6 +1,6 @@
 <!--#include file="includes/header.asp"-->
 <!--#include file="../config/conexao.asp"-->
-
+<!--#include file="../functions/functions.asp"-->
 <nav class="navbar navbar-expand-lg navbar-dark py-4 bg-dark">    
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
         <span class="navbar-toggler-icon"></span>
@@ -36,6 +36,9 @@
 %>
 
 <div class="container" style="display: flex; justify-content: center; align-items: center; height: 10vh;"></div>
+    <%
+        call getMessage()
+    %>
     <h1 class='text-info text-center'>Editar dados da empresa</h1>
     
     <form class="mt-5" style="display: flex; justify-content: center; align-items: center; flex-direction: column;" action="functions/editarEmpresa.asp" method="POST" enctype="multipart/form-data">
@@ -43,10 +46,10 @@
         <input type="hidden" name="id" value='<% =request.querystring("id") %>' id="id">
         <div class="form-row">
             <div class="form-group">
-                <input type="text" value='<% =req("razao_social") %>' name="razaoSocial" id="razaoSocial" placeholder="Razão Social" class="form-control">
+                <input type="text" maxlength="255" value='<% =req("razao_social") %>' name="razaoSocial" id="razaoSocial" placeholder="Razão Social" class="form-control">
             </div>
             <div class="form-group">
-                <input type="text" value='<% =req("nome") %>' name="nome" id="nome" placeholder="Nome" class="form-control">
+                <input type="text" maxlength="255" value='<% =req("nome") %>' name="nome" id="nome" placeholder="Nome" class="form-control">
             </div>
             <div class="form-group">
                 <label id="logoLabel" class="btn btn-info logoLabel" for="logoEmpresas">Logotipo</label>
@@ -57,13 +60,13 @@
         </div>
         <div class="form-row">
             <div class="form-group">
-                <input type="text" value='<% =req("celular") %>' name="celular" id="celular" placeholder="Celular" class="form-control">
+                <input type="text" maxlength="255" value='<% =req("celular") %>' name="celular" id="celular" placeholder="Celular" class="form-control">
             </div>
             <div class="form-group">
-                <input type="email" value='<% =req("email") %>' name="email" id="email" placeholder="E-mail" class="form-control">
+                <input type="email" maxlength="255" value='<% =req("email") %>' name="email" id="email" placeholder="E-mail" class="form-control">
             </div>
             <div class="form-group">
-                <input type="password" name="senha" id="senha" placeholder="Senha" class="form-control">
+                <input type="password" maxlength="255" name="senha" id="senha" placeholder="Senha" class="form-control">
             </div>
         </div>
         <div class="form-row">
@@ -77,3 +80,51 @@
 
 <!--#include file="includes/footer.asp"-->
 <script src="assets/js/mudarLabel.js"></script>
+
+<script>
+    // validate
+    $(document).ready(function(){
+        $("#cadastroEmpresa").validate({
+            rules:{
+                nome:{
+                    maxlength:255
+                },
+                razaoSocial:{
+                    maxlength:200
+                },
+                email:{
+                    email:true,
+                    maxlength:255
+                },
+                celular:{
+                    minlength:14,
+                    maxlength:15
+                },
+                senha:{
+                    minlength:6,
+                    maxlength:255
+                }
+            },
+            messages:{
+                nome:{
+                    maxlength:"*Número de caracteres excede o tamanho máximo permitido!"
+                },
+                razaoSocial:{
+                    maxlength:"*Número de caracteres excede o tamanho máximo permitido!"
+                },
+                senha:{
+                    minlength:"*Digite uma senha de pelo menos 6 dígitios",
+                    maxlength:"*Número de caracteres excede o tamanho máximo permitido!"
+                },
+                email:{
+                    email:"*Digite um endereço de E-mail valido!",
+                    maxlength:"*Número de caracteres excede o tamanho máximo permitido!"
+                },
+                celular:{
+                    minlength:"*Digite um número de celular valido!",
+                    maxlength:"*Digite um número de celular valido!"
+                }
+            }
+        });
+    });
+</script>

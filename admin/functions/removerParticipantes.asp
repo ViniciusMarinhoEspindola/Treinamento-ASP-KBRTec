@@ -4,5 +4,6 @@
     deletados = request.form("deletados")
     SQL = "Delete From participantes where id_participante in (" & deletados & ");"
     execQuery(SQL) 'Deleta o registro no banco'
-    response.write("Deletado com sucesso!")
+    Session("status") = "Sucesso"
+    Session("message") = "O(s) participante(s) foi(foram) deletado(s) com sucesso."
 %>

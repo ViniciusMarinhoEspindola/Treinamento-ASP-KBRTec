@@ -1,7 +1,7 @@
 <%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
 <!--#include file="includes/header.asp"-->
 <!--#include file="../config/conexao.asp"-->
-
+<!--#include file="../functions/functions.asp"-->
 <nav class="navbar navbar-expand-lg navbar-dark py-4 bg-dark">    
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
         <span class="navbar-toggler-icon"></span>
@@ -36,6 +36,9 @@
 %>
 
 <div class="container" style="display: flex; justify-content: center; align-items: center; height: 10vh;"></div>
+    <%
+        call getMessage()
+    %>
     <h1 class='text-info text-center'>Editar dados da empresa</h1>
     
     <form class="mt-5" style="display: flex; justify-content: center; align-items: center; flex-direction: column;" action="functions/editarParticipante.asp" method="POST">

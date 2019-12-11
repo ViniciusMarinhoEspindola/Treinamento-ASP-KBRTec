@@ -1,40 +1,25 @@
 <%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
-<!--#include file="../../config/conexao.asp"-->
-<!--#include file="../includes/header.asp"-->
+<!--#include file="../config/conexao.asp"-->
+<!--#include file="../functions/functions.asp"-->
+<!--#include file="includes/header.asp"-->
 
-<nav class="navbar navbar-expand-lg navbar-dark py-4 bg-info">     
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    
-    <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
-        <h1 class="ml-auto mr-auto navbar-brand">Página do Lojista</h1>
-    </div>
-</nav>
 <%
-    'SET upl = Server.CreateObject("SoftArtisans.FileUp") 
-    'upl.Path = Server.MapPath("../uploads/")
-    'clientes = upl.userFilename
-    'upl.Save
-    If request.Form("codigos") <> "" Then
-        Dim codigos, SQL
-        codigos = request.Form("codigos")
-        codigos = split(codigos, Chr(13))
-        codigos(0) = " "&codigos(0)
-
-        cd = "'"
-        For Each codigo In codigos
-            cd = cd & right(codigo, (len(codigo)-1)) & "','"
-        Next
-        cd = left(cd, (len(cd)-2))
-        
-        SQL = "SELECT * FROM participantes WHERE id_participante in (" & cd & ");"
+    SET upl = Server.CreateObject("SoftArtisans.FileUp") 
+    Dim codigos, cd, SQL, id
+    If upl.Form("codigos") <> "" Then
+        codigos = upl.Form("codigos")
+        codigos = replace(codigos, Chr(13), "")
+        codigos = replace(codigos, Chr(10), ";")
+        codigos = replace(codigos, "-", "")
+        codigos = split(codigos, ";")
+        cd = "'" & join(codigos, "','") & "'"
     End if
+    id = replace(cd, "'", "")        
+    SQL = "SELECT distinct * FROM participantes WHERE id_participante in (" & cd & ");"
     SET req = getConsulta(SQL)
-
 %>
-
 <div class="container mt-5">
+    <button class="btn btn-outline-info my-2" onclick="window.location.href='./'">Voltar</button>
     <div class="table-responsivee">
         <table id="table-consulta-participantes" class="table table-hover">
             <thead class="bg-info text-light">
@@ -50,6 +35,7 @@
             <tbody>
                 <%
                     If not req.EOF Then
+                        email = "<table border='1'><thead><tr><th>Nome</th><th>Tipo de ingresso</th><th>E-mail</th><th>Telefone</th><th>Data do Evento</th><th>Fase de planejamento</th></tr></thead><tbody>"
                         do until req.EOF    
                             response.write("<tr class='text-center'>")
                                 response.write("<td>" & req("nome") & " " & req("sobrenome") & "</td>")
@@ -59,16 +45,20 @@
                                 response.write("<td>" & req("data_evento") & "</td>")
                                 response.write("<td>" & req("fase_planejamento") & "</td>")
                             response.write("</tr>")
-                            'response.write(req("nome"))
+                            email = email & "<tr><td>" & req("nome") & " " & req("sobrenome") & "</td> <td>" & req("tipo_de_ingresso") & "</td><td>" & req("email") & "</td><td>" & req("telefone") & "</td><td>" & req("data_evento") & "</td><td>" & req("fase_planejamento") & "</td></tr>"
                             req.moveNext
                         loop
+                        email = email & "</tbody></table>"
+                        call enviaEmail(Session("emailLojistas"), "Dados dos participantes", email)
                     End if
                 %>
             </tbody>
         </table>
     </div>
+    <a href='functions/gerarExcel.asp?id=<% =id %>' class="text-light my-5 btn btn-info">Gerar Excel</a>
 </div>
-<!--#include file="../includes/footer.asp"-->
+
+<!--#include file="includes/footer.asp"-->
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.js"></script>
 <script>
     // DataTable
@@ -78,9 +68,12 @@
                 "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json"
             },
             "order": [],
-            "lengthMenu": [[5, 10], [5, 10]],
-            
-        });
-       
+            "lengthMenu": [[5, 10], [5, 10]], 
+        });       
     });
 </script>
+<% 
+    req.close
+    Set upl = Nothing 
+%>
+
