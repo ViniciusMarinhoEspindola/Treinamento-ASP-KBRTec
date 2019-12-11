@@ -8,7 +8,7 @@
 
     If not req.EOF Then
         If req("permissao") Then
-            Session("dadosUsuario") = Array("","","","")
+            Session("dadosUsuario") = Array("","","","","")
             Session("status") = ""
             Session("message") = ""
             Session("admin") = true

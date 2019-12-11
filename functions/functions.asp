@@ -13,20 +13,20 @@ Function consultarParticipantes(codigos)
     SET consultarParticipantes = cd
 End Function
 
-function sqlInjection(string)
+function sqlInjection(str)
 
     'Palavras que serão barradas caso encontradas nos request
 
     'palavrasDoMal = array("insert", "drop", " or ", "update", "cast", "'")
-    palavrasDoMal = array("'", "´", " or ", "select", "insert", "delete", "drop", "update", "cast", ";", "--", "xp_", "order", "desc", "asc", "where", ".", ",", " ", "%20", "%")
+    palavrasDoMal = array("select", "insert", "delete", "drop", "update", "cast", ";", "where")
 
-    ' Verificando o que é passado pelo request.queryString
-
+    ' Verificando o que é passado
     for each x in palavrasDoMal
-        if instr(lcase(string), x) Then
-            'replace(string, )
-           response.write("Injection")
+        if instr(lcase(str), x) Then
+           'str = replace(str, x, "Hoje não")
+           str = "injection"
         End if
+        sqlInjection = str
     next
 End function
 

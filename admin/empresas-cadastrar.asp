@@ -69,7 +69,7 @@
         </form>
     </div>
 </div>
-<% Session("dadosUsuario") = Array("","","","") %>
+<% Session("dadosUsuario") = Array("","","","","") %>
 <!--#include file="includes/footer.asp"-->
 <script src="assets/js/mudarLabel.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
