@@ -41,7 +41,7 @@
     %>
     <h1 class='text-info text-center'>Editar dados da empresa</h1>
     
-    <form class="mt-5" style="display: flex; justify-content: center; align-items: center; flex-direction: column;" action="functions/editarEmpresa.asp" method="POST" enctype="multipart/form-data">
+    <form class="mt-5" id="editEmpresa" style="display: flex; justify-content: center; align-items: center; flex-direction: column;" action="functions/editarEmpresa.asp" method="POST" enctype="multipart/form-data">
         <img class='img-logo mb-3' src='assets/images/logotipos/<% =req("logotipo") %>'>
         <input type="hidden" name="id" value='<% =request.querystring("id") %>' id="id">
         <div class="form-row">
@@ -63,7 +63,7 @@
                 <input type="text" maxlength="255" value='<% =req("celular") %>' name="celular" id="celular" placeholder="Celular" class="form-control">
             </div>
             <div class="form-group">
-                <input type="email" maxlength="255" value='<% =req("email") %>' name="email" id="email" placeholder="E-mail" class="form-control">
+                <input type="text" maxlength="255" value='<% =req("email") %>' name="email" id="email" placeholder="E-mail" class="form-control">
             </div>
             <div class="form-group">
                 <input type="password" maxlength="255" name="senha" id="senha" placeholder="Senha" class="form-control">
@@ -80,11 +80,17 @@
 
 <!--#include file="includes/footer.asp"-->
 <script src="assets/js/mudarLabel.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 <script>
+    // Mascara
+    $("input[name=celular]").mask("(00) 00000-0009");
+    $("input[name=telefone]").mask("(00) 0000-0000");
+    
     // validate
     $(document).ready(function(){
-        $("#cadastroEmpresa").validate({
+        $("#editEmpresa").validate({
             rules:{
                 nome:{
                     maxlength:255

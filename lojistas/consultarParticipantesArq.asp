@@ -22,8 +22,15 @@
         CSVFile = upl.Path & "\" & clientes
 
         set fso = createobject("scripting.filesystemobject")
+        'On Error Resume Next
         set objFile = fso.opentextfile(server.MapPath("../uploads/" & clientes))
-        
+        'If not err = 0 Then
+            'Session("status") = "Erro"
+            'Session("message") = "O arquivo enviado não corresponde ao formato padrão."
+            'Response.Redirect("./")
+        'End if
+
+
         cd = "'"
         Do Until objFile.AtEndOfStream
             linha = split(objFile.ReadLine,",")

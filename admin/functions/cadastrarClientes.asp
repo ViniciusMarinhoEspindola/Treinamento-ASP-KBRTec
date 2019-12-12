@@ -48,14 +48,14 @@
                 Next   
                 If not req.EOF Then
                     do until req.EOF
-                        If campos(0) = req("id_participante") Then
+                        If replace(campos(0), "-", "") = req("id_participante") Then
                             consulta = true
                         End if
                         req.movenext
                     loop
                     req.movefirst
                 End if
-                If consulta = false Then
+                If Not consulta Then
                     telefone = campos(5) & campos(6)                
                     SQL = SQL & "'" & replace(campos(0), "-", "") & "','" & campos(1) & "','" & campos(2) & "','" & campos(3) & "','" & campos(4) & "','" & telefone & "',STR_TO_DATE('" & campos(7) & "','%d/%m/%Y'), '" & campos(8) & "'"
                 End if
@@ -68,6 +68,7 @@
             SQL = replace(SQL, ",()", "")
 
             execQuery(SQL)
+            response.write(SQL)
         End if
 
         RS.close

@@ -89,6 +89,15 @@
 .tamanho-icone{
     font-size: 1.7em;
 }
+input.error{
+    border-bottom: 1px red solid;
+}
+label.error{
+    color: red;
+}
+input.valid{
+    border-bottom: 1px green solid;
+}
 
 .checkbox-container {
     display: block;
@@ -101,6 +110,7 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    
   }
   
   /* Hide the browser's default checkbox */
@@ -119,12 +129,16 @@
     left: 0;
     height: 25px;
     width: 25px;
-    background-color: #eee;
+    background-color: #B0E0E6;
+    border-radius: 2px;
+    border: .2px dotted black;
+    opacity: .7;
+    
   }
   
   /* On mouse-over, add a grey background color */
   .checkbox-container:hover input ~ .checkmark {
-    background-color: #ccc;
+    background-color: #5bc0de;
   }
   
   /* When the checkbox is checked, add a blue background */
@@ -148,8 +162,8 @@
   .checkbox-container .checkmark:after {
     left: 9px;
     top: 5px;
-    width: 5px;
-    height: 10px;
+    width: 8px;
+    height: 12px;
     border: solid white;
     border-width: 0 3px 3px 0;
     -webkit-transform: rotate(45deg);
