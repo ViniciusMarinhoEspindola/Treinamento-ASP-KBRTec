@@ -13,20 +13,19 @@ Function consultarParticipantes(codigos)
     SET consultarParticipantes = cd
 End Function
 
-function sqlInjection(str)
+Function limpar(str)
 
     'Palavras que serão barradas caso encontradas nos request
 
     'palavrasDoMal = array("insert", "drop", " or ", "update", "cast", "'")
-    palavrasDoMal = array("select", "insert", "delete", "drop", "update", "cast", ";", "where")
+    palavrasDoMal = array(";", "=", """", "--", "#", "$", "¨", "*", "%", "&", "'", "<", ">")
 
     ' Verificando o que é passado
     for each x in palavrasDoMal
-        if instr(lcase(str), x) Then
-           'str = replace(str, x, "Hoje não")
-           str = "injection"
+        if instr(trim(lcase(str)), x) Then
+           str = replace(str, x, "")
         End if
-        sqlInjection = str
+        limpar = str
     next
 End function
 
@@ -104,4 +103,16 @@ Sub getMessage()
         session("message") = ""
     End if
 End sub
+
+Function verificaExt(arq, validExt)
+    fileNameArray = Split(arq, ".")
+    ext           = fileNameArray(UBound(fileNameArray))
+
+    If UBound(Filter(validExt, ext)) = -1 Then
+        Session("status") = "Erro"
+        Session("message") = "A extensão " & ext & " não é uma extensão de imagem válida."
+        verificaExt = false
+    End if    
+    verificaExt = True
+End function
 %>

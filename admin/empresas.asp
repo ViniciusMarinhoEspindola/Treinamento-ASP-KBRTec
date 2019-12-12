@@ -61,8 +61,8 @@
                             response.write("<td>" & req("email") & "</td>")
                             response.write("<td>" & req("razao_social") & "</td>")
                             response.write("<td>" & req("celular") & "</td>")
-                            response.write("<td><a href='editarEmpresa.asp?id=" & req("id_lojista") & "'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a></td>")
-                            response.write("<td><a href='functions/removerEmpresa.asp?id=" & req("id_lojista") & "'><i class='fa fa-minus-square-o' aria-hidden='true'></i></a></td>")
+                            response.write("<td><a href='editarEmpresa.asp?id=" & req("id_lojista") & "'><i class='tamanho-icone fa fa-pencil-square-o' aria-hidden='true'></i></a></td>")
+                            response.write("<td><a href='functions/removerEmpresa.asp?id=" & req("id_lojista") & "'><i class='tamanho-icone fa fa-minus-square-o' aria-hidden='true'></i></a></td>")
                         response.write("</tr>")
                         req.moveNext
                     loop

@@ -40,10 +40,10 @@
         <form action="functions/cadastrarEmpresa.asp" method="POST" class="mt-5" id="cadastroEmpresa" enctype="multipart/form-data">
             <div class="form-row">
                 <div class="form-group">
-                    <input type="text" value='<% =Session("dadosUsuario")(0) %>' maxlength="255" name="razaoSocial" id="razaoSocial" placeholder="Razão Social" class="form-control">
+                    <input type="text" required value='<% =Session("dadosUsuario")(0) %>' maxlength="255" name="razaoSocial" id="razaoSocial" placeholder="Razão Social" class="form-control">
                 </div>
                 <div class="form-group">
-                    <input type="text" value='<% =Session("dadosUsuario")(1) %>' maxlength="255" name="nome" id="nome" placeholder="Nome" class="form-control">
+                    <input type="text" required value='<% =Session("dadosUsuario")(1) %>' maxlength="255" name="nome" id="nome" placeholder="Nome" class="form-control">
                 </div>
                 <div class="form-group">
                     <label id="logoLabel" class="btn btn-info logoLabel" for="logo">Logotipo</label>
@@ -52,13 +52,13 @@
             </div>
             <div class="form-row">
                 <div class="form-group">
-                    <input type="text" value='<% =Session("dadosUsuario")(2) %>' maxlength="255" name="celular" id="celular" placeholder="Celular" class="form-control">
+                    <input type="text" required value='<% =Session("dadosUsuario")(2) %>' maxlength="255" name="celular" id="celular" placeholder="Celular" class="form-control">
                 </div>
                 <div class="form-group">
-                    <input type="email" value='<% =Session("dadosUsuario")(3) %>' maxlength="255" name="email" id="email" placeholder="E-mail" class="form-control">
+                    <input type="email" required value='<% =Session("dadosUsuario")(3) %>' maxlength="255" name="email" id="email" placeholder="E-mail" class="form-control">
                 </div>
                 <div class="form-group">
-                    <input type="password" maxlength="255" name="senha" id="senha" placeholder="Senha" class="form-control">
+                    <input type="password" required maxlength="255" name="senha" id="senha" placeholder="Senha" class="form-control">
                 </div>
             </div>
             <div class="form-row">

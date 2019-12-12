@@ -7,7 +7,7 @@
     SET upl = Server.CreateObject("SoftArtisans.FileUp") 
     Dim codigos, cd, SQL, id
     If upl.Form("codigos") <> "" Then
-        codigos = upl.Form("codigos")
+        codigos = limpar(upl.Form("codigos"))
         codigos = replace(codigos, Chr(13), "")
         codigos = replace(codigos, Chr(10), ";")
         codigos = replace(codigos, "-", "")

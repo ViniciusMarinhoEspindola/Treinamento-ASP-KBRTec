@@ -8,7 +8,7 @@
     </button>
     
     <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
-        <h1 class="mr-auto navbar-brand"><i class="material-icons">store_mall_directory</i></h1>
+        <h1 class="mr-auto navbar-brand"><i class="fa fa-users"></i></h1>
 
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
@@ -66,8 +66,8 @@
                                 response.write("<td>" & req("telefone") & "</td>")
                                 response.write("<td>" & req("data_evento") & "</td>")
                                 response.write("<td>" & req("fase_planejamento") & "</td>")
-                                response.write("<td><a href='editarParticipante.asp?id=" & req("id_participante") & "'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a></td>")
-                                response.write("<td><label class='checkbox'><input type='checkbox' name='remover-participante' value='" & req("id_participante") & "'></label></td>")
+                                response.write("<td><a href='editarParticipante.asp?id=" & req("id_participante") & "'><i class='tamanho-icone fa fa-pencil-square-o' aria-hidden='true'></i></a></td>")
+                                response.write("<td><label class='checkbox-container'><input type='checkbox' name='remover-participante' value='" & req("id_participante") & "'><span class='checkmark'></span></label></td>")
                             response.write("</tr>")
                             req.moveNext
                         loop
@@ -94,7 +94,7 @@
                 "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json"
             },
             "order": [],
-            "lengthMenu": [[5, 10], [5, 10]],
+            "lengthMenu": [[5, 10, 100, -1], [5, 10, 100, "Todos"]],
             
         });
        
@@ -114,7 +114,6 @@
             beforeSend : function(){
                 $("#excluir-participantes").html("EXCLUINDO...");
                 $("#excluir-participantes").attr("disabled", true);
-                //$('#msg-status').html('<div class="alert alert-info col-12">Recebendo inscrição...</div>');
             },
             success: function(res){
                 console.log(res)

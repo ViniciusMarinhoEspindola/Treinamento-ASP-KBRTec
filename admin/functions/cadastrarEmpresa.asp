@@ -6,18 +6,13 @@
 
     SET upl = Server.CreateObject("SoftArtisans.FileUp") 
 
-    razao_social =  sqlInjection(upl.Form("razaoSocial"))
-    nome = sqlInjection(upl.Form("nome"))
-    celular = sqlInjection(upl.Form("celular"))
-    email =  sqlInjection(upl.Form("email"))
-    senha = sqlInjection(upl.Form("senha"))
+    razao_social =  limpar(upl.Form("razaoSocial"))
+    nome = limpar(upl.Form("nome"))
+    celular = limpar(upl.Form("celular"))
+    email =  limpar(upl.Form("email"))
+    senha = limpar(upl.Form("senha"))
     dadosUsuario = Array(razao_social, nome, celular, email,senha)
     
-    If instr(join(dadosUsuario, ","), "injection") Then
-        Session("status") = ""
-        Session("message") = ""
-        Response.Redirect("../empresas.asp")
-    End if
 
     validExt = Array("png", "jpeg", "jpg", "gif")
     fileNameArray = Split(upl.UserFilename, ".")
@@ -41,13 +36,13 @@
         Response.Redirect("../empresas-cadastrar.asp")
     Else    
         SQL = "INSERT INTO lojistas (razao_social, nome, email, senha, celular, logotipo) VALUES ('" & razao_social &"', '" & nome &"', '" & email &"', md5('" & senha &"'), '" & celular &"', '" & logotipo &"');"
-        'execQuery(SQL)
-        Response.write(SQL)
-        'upl.SaveAs(Server.MapPath("..\assets\images\logotipos\"&logotipo))
+        execQuery(SQL)
+
+        upl.SaveAs(Server.MapPath("..\assets\images\logotipos\"&logotipo))
         Set upl = Nothing 
         
         Session("status") = "Sucesso"
         Session("message") = "A empresa foi cadastrada com sucesso."
-        'Response.Redirect("../empresas.asp")
+        Response.Redirect("../empresas.asp")
     End if
 %>
