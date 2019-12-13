@@ -9,7 +9,7 @@
         </button>
         
         <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
-            <h1 class="mr-auto navbar-brand">No Mosquito</h1>
+            <h1 class="mr-auto navbar-brand">No Mosquito - Eventos</h1>
         </div>
     </nav>
 

@@ -57,17 +57,15 @@
 
                         response.write("<tr class='text-center'>")
                             response.write("<td><img class='img-logo' src='assets/images/logotipos/" & req("logotipo") & "'></td>")
-                            response.write("<td>" & req("nome") & "</td>")
-                            response.write("<td>" & req("email") & "</td>")
-                            response.write("<td>" & req("razao_social") & "</td>")
+                            response.write("<td><span class='d-inline-block' style='max-width: 200px; word-wrap: break-word;'>" & req("nome") & "</span></td>")
+                            response.write("<td><span class='d-inline-block' style='max-width: 200px; word-wrap: break-word;'>" & req("email") & "</span></td>")
+                            response.write("<td><span class='d-inline-block' style='max-width: 200px; word-wrap: break-word;'>" & req("razao_social") & "</span></td>")
                             response.write("<td>" & req("celular") & "</td>")
                             response.write("<td><a href='editarEmpresa.asp?id=" & req("id_lojista") & "'><i class='tamanho-icone fa fa-pencil-square-o' aria-hidden='true'></i></a></td>")
                             response.write("<td><a href='functions/removerEmpresa.asp?id=" & req("id_lojista") & "'><i class='tamanho-icone fa fa-minus-square-o' aria-hidden='true'></i></a></td>")
                         response.write("</tr>")
                         req.moveNext
                     loop
-                Else
-                    response.write("Nonhum usuário encontrado")
                 End if
             %>
         </tbody>

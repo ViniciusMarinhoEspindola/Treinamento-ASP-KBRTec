@@ -2,6 +2,15 @@
 <%
     SET upl = Server.CreateObject("SoftArtisans.FileUp") 
     upl.Path = Server.MapPath("../../uploads/")
+
+    upl.MaxBytes = 1000000
+    If upl.Form("clientes").TotalBytes > 1000000 Then
+        Session("status") = "Erro"
+        Session("message") = "O tamanho do arquivo enviado é muito grande, por favor selecione um arquivo menor."
+        Response.Redirect("../clientes-cadastrar.asp")
+    End if
+    
+
     clientes = upl.userFilename
     
     validExt = Array("xls", "xlsx")

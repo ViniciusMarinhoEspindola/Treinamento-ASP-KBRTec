@@ -37,7 +37,7 @@
     Else    
         SQL = "INSERT INTO lojistas (razao_social, nome, email, senha, celular, logotipo) VALUES ('" & razao_social &"', '" & nome &"', '" & email &"', md5('" & senha &"'), '" & celular &"', '" & logotipo &"');"
         execQuery(SQL)
-
+        Response.write(SQL)
         upl.SaveAs(Server.MapPath("..\assets\images\logotipos\"&logotipo))
         Set upl = Nothing 
         

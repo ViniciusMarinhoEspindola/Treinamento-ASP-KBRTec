@@ -29,6 +29,7 @@ Function limpar(str)
     next
 End function
 
+
 function retornaNumeroAleatorio(qtd)
     str_aleatorio = ""
     if qtd="" or not isnumeric(qtd) then qtd=0

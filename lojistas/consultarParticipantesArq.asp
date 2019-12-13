@@ -6,6 +6,13 @@
     SET upl = Server.CreateObject("SoftArtisans.FileUp") 
     If upl.userFilename <> "" Then
         upl.Path = Server.MapPath("../uploads/")
+        upl.MaxBytes = 100000
+        If upl.Form("consultar").TotalBytes > 100000 Then
+            Session("status") = "Erro"
+            Session("message") = "O tamanho do arquivo enviado é muito grande, por favor selecione um arquivo menor."
+            Response.Redirect("./")
+        End if
+
         clientes = upl.userFilename
     
         validExt = Array("csv")
@@ -22,25 +29,51 @@
         CSVFile = upl.Path & "\" & clientes
 
         set fso = createobject("scripting.filesystemobject")
-        'On Error Resume Next
         set objFile = fso.opentextfile(server.MapPath("../uploads/" & clientes))
-        'If not err = 0 Then
-            'Session("status") = "Erro"
-            'Session("message") = "O arquivo enviado não corresponde ao formato padrão."
-            'Response.Redirect("./")
-        'End if
-
 
         cd = "'"
         Do Until objFile.AtEndOfStream
-            linha = split(objFile.ReadLine,",")
-            cd = cd & replace(linha(2),"""", "") & "','"
+            linha = objFile.ReadLine
+            linha = replace(linha, ";", ",")
+            On Error Resume Next
+            linha = split(linha,",")
+            If not err = 0 Then
+                Session("status") = "Erro"
+                Session("message") = "O arquivo enviado não corresponde ao formato csv padrão. Envie um arquivo csv com os códigos de ingresso separados por (,) ou (;)."
+                Response.Redirect("./")
+            End if
+            For Each codigo In linha
+                On Error Resume Next
+                cd = cd & replace(codigo,"""", "") & "','"
+                If not err = 0 Then
+                    Session("status") = "Erro"
+                    Session("message") = "O arquivo enviado não corresponde ao formato csv padrão."
+                    Response.Redirect("./")
+                End if
+            Next
         Loop
+        On Error Resume Next
         cd = left(cd, len(cd)-2)
+        If not err = 0 Then
+            Session("status") = "Erro"
+            Session("message") = "O arquivo enviado não corresponde ao formato csv padrão."
+            Response.Redirect("./")
+        End if
+        If not err = 0 Then
+            Session("status") = "Erro"
+            Session("message") = "O arquivo enviado não corresponde ao formato padrão."
+            Response.Redirect("./")
+        End if
         objFile.Close
+    
+    Else
+        Session("status") = "Erro"
+        Session("message") = "Por favor selecione um arquivo .csv para obter a lista de participantes."
+        Response.Redirect("./")
     End if
     id = replace(cd, "'", "")        
     SQL = "SELECT distinct * FROM participantes WHERE id_participante in (" & cd & ");"
+
     SET req = getConsulta(SQL)
 %>
 <div class="container mt-5">
